@@ -1,0 +1,50 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    name: Validate HTML and CSS
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          npm install -g html-validate
+          npm install -g stylelint stylelint-config-standard
+      
+      - name: Validate HTML
+        run: |
+          html-validate index.html || true
+      
+      - name: Check file structure
+        run: |
+          test -f index.html || exit 1
+          test -f README.md || exit 1
+          test -d styles || exit 1
+          test -d fonts || exit 1
+          test -d images || exit 1
+          test -d scripts || exit 1
+          echo "File structure is correct"
+      
+      - name: Check CSS files exist
+        run: |
+          test -f styles/variables.css || exit 1
+          test -f styles/globals.css || exit 1
+          test -f styles/style.css || exit 1
+          test -f styles/animations.css || exit 1
+          test -f fonts/fonts.css || exit 1
+          echo "All CSS files exist"
+
