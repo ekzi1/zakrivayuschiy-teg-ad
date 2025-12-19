@@ -61,4 +61,4 @@
 
 ## Ссылки
 
-* **Репозиторий:** https://github.com/ekzi1/zakrivayuschiy-teg-yandex.git
+* **Репозиторий:** https://github.com/ekzi1/zakrivayuschiy-teg-ad.git
